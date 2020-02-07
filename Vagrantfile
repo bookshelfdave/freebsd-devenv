@@ -17,9 +17,10 @@ Vagrant.configure("2") do |config|
     pkg install -y bash git neovim wget curl
     export VERSION=$(uname -r | awk -F"-" '{ print $1 }')
     svnlite checkout https://svn.freebsd.org/base/releng/${VERSION} /usr/src
-    
-    wget https://raw.githubusercontent.com/metadave/dotfiles/master/.vimrc ~/.vimrc
-    mkdir -p /root/.config/nvim
+
+    curl -o /root/.vimrc https://raw.githubusercontent.com/metadave/dotfiles/master/.vimrc
+
+    mkdir -p /root/.config/nvim/
     cat << EOF > /root/.config/nvim/init.vim
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
